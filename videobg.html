@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+       body,div,video,img{margin:0; padding: 0; border:0; }
+
+        .video-container2{
+            width:100%;
+            background:transparent url("bg.png") 30%  no-repeat;
+            background-size:cover;
+        }
+        .video2{
+            width:100%;
+            display: block;
+            cursor: pointer;
+            -webkit-background-size:cover;
+            -moz-background-size:cover;
+            -o-background-size:cover;
+            background-size:cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container2">
+    <video id="Video" class="video2" src="http://wh.xhd.cn/topic/cxyw2017/cx.mp4" poster="transparent.png"  controls muted>
+
+    </video>
+
+    <script>
+        var Video=document.getElementById("Video");
+        Video.onclick=function(){
+            if(Video.paused){
+                Video.play();
+                Video.volume=0.0;
+            }
+            else{
+                Video.pause();
+                Video.controls=true;
+            }
+
+        }
+    </script>
+</div>
+</body>
+</html>
