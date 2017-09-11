@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>return top</title>
+</head>
+<body>
+<div style="height: 10000px;"></div>
+<div id="top" style=" width: 100px; height: 100px; background: #000; position: fixed; bottom: 10px; right: 10px;">
+    <a href=""></a>
+</div>
+
+<div class="return_top" style=" width: 100px; height: 100px; background: #000; position: fixed; bottom: 10px; right: 200px;">
+    <a href=""></a>
+</div>
+<script>
+    var tops=document.getElementById('top');
+    var timer = null; //定义一个定时器
+    var isTop = true; //定义一个布尔值，用于判断是否到达顶部
+    window.onload=function(){
+    var oTops=document.body.scrollTop || document.documentElement.scrollTop;
+    var clientHeights = document.documentElement.clientHeight;
+
+    if(oTops >= clientHeights){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
+        document.getElementById('top').style.background = 'red';
+    }else{         //否则隐藏
+        document.getElementById('top').style.background = 'black';
+    }
+        //主要用于判断当 点击回到顶部按钮后 滚动条在回滚过程中，若手动滚动滚动条，则清除定时器
+        if(!isTop){
+
+            clearInterval(timer);
+        }
+        isTop = false;
+    };
+
+    tops.onclick=function(){
+       cancelAnimationFrame(timer);
+       timer=requestAnimationFrame(
+               function fn(){
+                   var oTop=document.body.scrollTop || document.documentElement.scrollTop;
+
+               if(oTop>0){
+
+                   document.body.scrollTop=document.documentElement.scrollTop=oTop-50;
+                   timer=requestAnimationFrame(fn);
+
+               }
+               else{
+                   cancelAnimationFrame(timer);
+               }
+               }
+       )
+
+    };
+
+</script>
+
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+    function b(){
+        h=$(window).height();
+        t=$(document).scrollTop();
+        if(t>h){
+            $('.return_top').fadeIn();
+        }else{
+            $('.return_top').hide();
+        }
+    }
+    $(function(e){
+          b();
+        $('.return_top').on('click',function(){
+            $('html').animate({scrollTop:0},800);
+        });
+            });
+
+    $(window).scroll(function(e){
+        b();
+    });
+</script>
+</body>
+</html>
